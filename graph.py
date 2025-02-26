@@ -9,6 +9,8 @@ class Graph:
     def toAdjacencyList(self, edges, isOriented):
         adjacencyList = {}
         for u, v in edges:
+            u -= 1
+            v -= 1
             if u in adjacencyList:
                 adjacencyList[u].append(v)
             else:
@@ -23,9 +25,11 @@ class Graph:
     def toAdjacencyMatrix(self, numberOfVertices, edges, isOriented):
         adjacencyMatrix = [[0 for _ in range(numberOfVertices)] for _ in range(numberOfVertices)]
         for u, v in edges:
-            adjacencyMatrix[u - 1][v - 1] = 1
+            u -= 1
+            v -= 1
+            adjacencyMatrix[u][v] = 1
             if not isOriented:
-                adjacencyMatrix[v - 1][u - 1] = 1
+                adjacencyMatrix[v][u] = 1
         return adjacencyMatrix
     def __str__(self):
         return (f"Number of vertices: {self.numberOfVertices}\n"
